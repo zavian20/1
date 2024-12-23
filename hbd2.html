@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HBD gheghe</title>
+  <style>
+    /* General Styling */
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Story+Element:wght@400;700&display=swap');
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lato', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #f8bbd0);
+      width: 100vw;
+      min-height: 120vh; /* Tambahkan tinggi halaman */
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 5vh;
+    }
+
+    header h1 {
+      font-size: 6vw; /* Perkecil ukuran font */
+      font-family: 'Great Vibes', cursive;
+      color: #880e4f;
+      letter-spacing: 2px;
+    }
+
+    header .explore-btn {
+      margin-top: 2vh;
+      padding: 1vh 4vw;
+      font-size: 3vw;
+      border: none;
+      color: white;
+      background-color: #880e4f;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Arial', sans-serif;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    header .explore-btn:hover {
+      background-color: #ad1457;
+      transform: scale(1.05);
+    }
+
+    .rectangles {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2vh;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.5s ease;
+    }
+
+    .rectangles.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .rectangle {
+      width: 50vw;
+      height: 6vh;
+      background-color: #ba68c8;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4vw;
+      font-family: 'Story Element', cursive;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .rectangle:hover {
+      transform: scale(1.05);
+      background-color: #ab47bc;
+    }
+
+    .slide {
+      width: 90vw;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      margin-top: 2vh;
+      text-align: center;
+      padding: 5vw; /* Tambahkan ruang dalam */
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(-20px);
+      transition: all 0.5s ease;
+    }
+
+    .slide.show {
+      opacity: 1;
+      max-height: 80vh;
+      transform: translateY(0);
+    }
+
+    .slide h3 {
+      margin: 2vh 0;
+      color: #880e4f;
+      font-size: 5vw; /* Perkecil ukuran font */
+      font-family: 'Great Vibes', cursive;
+    }
+
+    .slide img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin: 2vh 0;
+    }
+
+    .slide p {
+      margin-top: 2vh;
+      font-size: 3vw; /* Perkecil ukuran font */
+      color: #444;
+      line-height: 1.6;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .next-btn {
+      margin-top: 2vh;
+      padding: 1vh 4vw;
+      font-size: 3vw;
+      border: none;
+      color: white;
+      background-color: #5e35b1;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Arial', sans-serif;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .next-btn:hover {
+      background-color: #512da8;
+      transform: scale(1.05) translateX(-50%);
+    }
+
+    .future-message {
+      width: 90vw;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      margin-top: 4vh;
+      text-align: center;
+      padding: 4vw;
+      max-height: 70vh; /* Tinggi maksimum untuk gulir */
+      overflow-y: auto; /* Tambahkan gulir jika konten panjang */
+    }
+
+    .future-message h3 {
+      font-size: 5vw; /* Perkecil ukuran font */
+      font-family: 'Great Vibes', cursive;
+      color: #880e4f;
+      margin-bottom: 2vh;
+    }
+
+    .future-message p {
+      font-size: 3vw; /* Perkecil ukuran font */
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      animation: fall 8s linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10px);
+        opacity: 0;
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ada yang nambah nih umurnya :) </h1>
+    <button class="explore-btn" onclick="showRectangles()">Klik Dong</button>
+  </header>
+
+  <div class="rectangles" id="rectangles">
+    <div class="rectangle" onclick="showSlide('H')">H</div>
+    <div class="rectangle" onclick="showSlide('B')">B</div>
+    <div class="rectangle" onclick="showSlide('D')">D</div>
+  </div>
+
+  <div class="slide" id="slide">
+    <h3 id="slide-title"></h3>
+    <img id="slide-img" src="" alt="Custom Image">
+    <p id="slide-text"></p>
+    <button class="next-btn" id="next-btn" onclick="showNextSlide()" style="display: none;">Next</button>
+  </div>
+
+  <div class="future-message" id="future-message" style="display: none;">
+    <h3>From me at the end of the year to you in the year to come</h3>
+    <p>This year, you have been the reason for smiles and happiness in many hearts including mine, thank you. In the coming year, I don't have many messages, just a few, keep that beautiful smile, don't think too much about something that is not your domain, keep living for the happiness to come.
+Continue to be a special little baby, who brings infinite warmth and happiness. This world becomes more beautiful with your presence. Enjoy every moment of your growth, gege. </p>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="background-music" autoplay loop>
+    <source src="music/photograph.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    function showRectangles() {
+      const rectangles = document.getElementById('rectangles');
+      rectangles.classList.add('show');
+    }
+
+    function showSlide(letter) {
+      const slide = document.getElementById('slide');
+      const title = document.getElementById('slide-title');
+      const img = document.getElementById('slide-img');
+      const text = document.getElementById('slide-text');
+      const nextBtn = document.getElementById('next-btn');
+
+      if (letter === 'H') {
+        title.textContent = 'Heartfelt Treasure';
+        img.src = '1.jpg';
+		img.width = 300;
+		img.height = 100;
+        text.textContent = 'You are a precious gift to those around you. Behind your glasses lies a sweet smile that warms hearts, and your playful charm makes people adore and protect you unconditionally. Always be proud of the wonderful person you are.';
+      } else if (letter === 'B') {
+        title.textContent = 'Bright and Blissful';
+        img.src = '5.jpg';
+		img.width = 300;
+		img.height = 100;
+        text.textContent = 'Your joy shines endlessly, like sunlight breaking through clouds. With your kind heart and cheerful words, you spread happiness effortlessly. May the joy you give return to you tenfold.';
+      } else if (letter === 'D') {
+        title.textContent = 'Delight of the World';
+        img.src = '2.jpg';
+		img.width = 300;
+		img.height = 100;
+        text.textContent = 'Your presence lights up the world. You are like the morning dew-soft, refreshing, and much appreciated. As the little baby I know, you have shown a maturity and understanding that inspires many. Continue to be a light of joy and sincerity.';
+        nextBtn.style.display = 'block';
+      }
+
+      slide.classList.add('show');
+    }
+
+    function showNextSlide() {
+      const slide = document.getElementById('slide');
+      const futureMessage = document.getElementById('future-message');
+
+      slide.classList.remove('show');
+      futureMessage.style.display = 'block';
+    }
+
+    // Create Snowfall Effect
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.style.left = Math.random() * 100 + 'vw';
+      snowflake.style.animationDuration = Math.random() * 3 + 5 + 's';
+      document.body.appendChild(snowflake);
+
+      setTimeout(() => {
+        snowflake.remove();
+      }, 8000);
+    }
+
+    setInterval(createSnowflake, 200);
+  </script>
+</body>
+</html>
